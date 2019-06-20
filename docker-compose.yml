@@ -1,0 +1,19 @@
+version: "3.6"
+
+services: 
+    webserver:
+        build: ./php
+        container_name: webapp_server
+        volumes:
+            - ./apache/sites-available:/etc/apache2/sites-available:ro
+            - ./www/:/var/www/html:ro
+        ports:
+            - 8080:80
+        restart: always
+        networks:
+            -   webservice
+            
+networks:
+    webservice:
+        driver: bridge
+        name: webservice
